@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notes App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex justify-center p-6">
+
+  <div class="w-full max-w-xl bg-white shadow-lg rounded-xl p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center">Notes App 📝</h1>
+
+    <!-- Add Note Form -->
+    <form action="/add" method="POST" class="flex gap-2 mb-6">
+      <input
+        type="text"
+        name="text"
+        placeholder="Write a note..."
+        class="flex-1 border rounded-lg px-4 py-2"
+        required
+      />
+      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+        Add
+      </button>
+    </form>
+
+    <!-- Notes List -->
+    <div class="space-y-3">
+      <% if (notes.length === 0) { %>
+        <p class="text-gray-500 text-center">No notes yet.</p>
+      <% } else { %>
+        <% notes.forEach(function(note) { %>
+          <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+            <p class="text-gray-800"><%= note.text %></p>
+            <form action="/delete/<%= note._id %>" method="POST" class="inline">
+              <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-lg">
+                Delete
+              </button>
+            </form>
+          </div>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+
+</body>
+</html>
